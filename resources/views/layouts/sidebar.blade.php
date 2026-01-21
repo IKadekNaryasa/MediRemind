@@ -37,7 +37,7 @@
                     </a>
 
                     <a href="{{ route('pasien.index') }}"
-                        class="flex items-center px-6 py-3 text-white hover:bg-primary-500 transition {{ request()->routeIs('pasien.index') ? 'bg-primary-500 border-white' : '' }}">
+                        class="flex items-center px-6 py-3 text-white hover:bg-primary-500 transition {{ request()->routeIs('pasien.index') ? 'bg-primary-500 border-l-4 border-white' : '' }}">
                         <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
                         </svg>
@@ -115,6 +115,34 @@
 
             <!-- Page Content -->
             <main class="flex-1 overflow-y-auto bg-gray-50 p-6">
+
+                <div class="mb-4">
+                    @if(session('success'))
+                    <div x-data="{ show: true }"
+                        x-show="show"
+                        x-transition
+                        x-init="setTimeout(() => show = false, 2000)"
+                        class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        {{ session('success') }}
+                    </div>
+                    @endif
+                </div>
+
+                @if($errors->has('errors'))
+                <div x-data="{ show: true }"
+                    x-show="show"
+                    x-transition
+                    x-init="setTimeout(() => show = false, 3000)"
+                    class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    {{ $errors->first('errors') }}
+                </div>
+                @endif
                 {{ $slot }}
             </main>
         </div>

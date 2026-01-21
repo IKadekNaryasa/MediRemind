@@ -20,4 +20,8 @@ class Patient extends Model
         'jam',
         'status'
     ];
+
+    protected $casts = [
+        'tanggalLahir' => 'date'
+    ];
 }

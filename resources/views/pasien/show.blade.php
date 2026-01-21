@@ -9,7 +9,7 @@
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                 </svg>
-                Kembali ke Daftar Pasien
+                Kembali
             </a>
         </div>
 
@@ -21,36 +21,30 @@
                         <!-- Avatar -->
                         <div class="flex-shrink-0">
                             <div class="w-24 h-24 rounded-full bg-white text-primary-600 flex items-center justify-center shadow-lg">
-                                <span class="text-4xl font-bold">{{ strtoupper(substr($pasien->nama, 0, 1)) }}</span>
+                                <span class="text-4xl font-bold">{{ strtoupper(substr($pasien->namaPasien, 0, 1)) }}</span>
                             </div>
                         </div>
 
                         <!-- Info Utama -->
                         <div class="flex-1 text-white">
-                            <h1 class="text-3xl font-bold mb-2">{{ $pasien->nama }}</h1>
+                            <h1 class="text-3xl font-bold mb-2">{{ $pasien->namaPasien }}</h1>
                             <div class="flex items-center space-x-4 text-primary-100 mb-4">
-                                <span class="flex items-center">
-                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"></path>
-                                    </svg>
-                                    No. RM: {{ $pasien->no_rekam_medis }}
-                                </span>
                                 <span class="flex items-center">
                                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                                     </svg>
-                                    {{ $pasien->jenis_kelamin }}
+                                    {{ $pasien->jenisKelamin }}
                                 </span>
                             </div>
 
                             <div class="flex items-center space-x-6">
                                 <div>
                                     <p class="text-sm text-primary-200">Umur</p>
-                                    <p class="text-xl font-semibold">{{ $pasien->umur }} Tahun</p>
+                                    <p class="text-xl font-semibold">{{ $pasien->tanggalLahir->age }} Tahun</p>
                                 </div>
                                 <div>
                                     <p class="text-sm text-primary-200">Status</p>
-                                    @if($pasien->status === 'Aktif')
+                                    @if($pasien->status === 'active')
                                     <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-green-500 text-white">
                                         <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
@@ -65,6 +59,10 @@
                                         Tidak Aktif
                                     </span>
                                     @endif
+                                </div>
+                                <div>
+                                    <p class="text-sm text-primary-200">Waktu Minum Obat</p>
+                                    <p class="text-xl font-semibold">{{ $pasien->jam }} Wita</p>
                                 </div>
                             </div>
                         </div>
@@ -117,15 +115,15 @@
                 <div class="p-6 space-y-4">
                     <div class="flex items-start">
                         <div class="w-40 text-sm font-medium text-gray-500">Tanggal Lahir</div>
-                        <div class="flex-1 text-sm text-gray-900">{{ $pasien->tanggal_lahir->format('d F Y') }}</div>
+                        <div class="flex-1 text-sm text-gray-900">{{ $pasien->tanggalLahir->format('d F Y') }}</div>
                     </div>
                     <div class="flex items-start">
                         <div class="w-40 text-sm font-medium text-gray-500">Jenis Kelamin</div>
-                        <div class="flex-1 text-sm text-gray-900">{{ $pasien->jenis_kelamin }}</div>
+                        <div class="flex-1 text-sm text-gray-900">{{ $pasien->jenisKelamin }}</div>
                     </div>
                     <div class="flex items-start">
                         <div class="w-40 text-sm font-medium text-gray-500">Umur</div>
-                        <div class="flex-1 text-sm text-gray-900">{{ $pasien->umur }} Tahun</div>
+                        <div class="flex-1 text-sm text-gray-900">{{ $pasien->tanggalLahir->age }} Tahun</div>
                     </div>
                     <div class="flex items-start">
                         <div class="w-40 text-sm font-medium text-gray-500">Alamat</div>
@@ -148,91 +146,16 @@
                     <div class="flex items-start">
                         <div class="w-40 text-sm font-medium text-gray-500">No. HP/WhatsApp</div>
                         <div class="flex-1">
-                            <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $pasien->no_hp) }}"
+                            <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $pasien->wa) }}"
                                 target="_blank"
                                 class="text-sm text-primary-600 hover:text-primary-800 flex items-center">
-                                {{ $pasien->no_hp }}
+                                {{ $pasien->wa }}
                                 <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                                 </svg>
                             </a>
                         </div>
                     </div>
-                    <div class="flex items-start">
-                        <div class="w-40 text-sm font-medium text-gray-500">Email</div>
-                        <div class="flex-1">
-                            @if($pasien->email)
-                            <a href="mailto:{{ $pasien->email }}"
-                                class="text-sm text-primary-600 hover:text-primary-800">
-                                {{ $pasien->email }}
-                            </a>
-                            @else
-                            <span class="text-sm text-gray-400">-</span>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Informasi Medis -->
-            <div class="bg-white rounded-lg shadow md:col-span-2">
-                <div class="px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-primary-50 to-white">
-                    <h3 class="text-lg font-semibold text-gray-800 flex items-center">
-                        <svg class="w-5 h-5 mr-2 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                        </svg>
-                        Informasi Medis
-                    </h3>
-                </div>
-                <div class="p-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="flex items-start">
-                            <div class="w-40 text-sm font-medium text-gray-500">No. Rekam Medis</div>
-                            <div class="flex-1 text-sm text-gray-900 font-semibold">{{ $pasien->no_rekam_medis }}</div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="w-40 text-sm font-medium text-gray-500">Tanggal Diagnosa</div>
-                            <div class="flex-1 text-sm text-gray-900">{{ $pasien->tanggal_diagnosa->format('d F Y') }}</div>
-                        </div>
-                    </div>
-
-                    @if($pasien->catatan)
-                    <div class="mt-4 pt-4 border-t border-gray-200">
-                        <div class="text-sm font-medium text-gray-500 mb-2">Catatan</div>
-                        <div class="text-sm text-gray-900 bg-gray-50 rounded-lg p-4">
-                            {{ $pasien->catatan }}
-                        </div>
-                    </div>
-                    @endif
-                </div>
-            </div>
-        </div>
-
-        <!-- Jadwal Obat Section (Untuk nanti) -->
-        <div class="bg-white rounded-lg shadow">
-            <div class="px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-primary-50 to-white">
-                <div class="flex items-center justify-between">
-                    <h3 class="text-lg font-semibold text-gray-800 flex items-center">
-                        <svg class="w-5 h-5 mr-2 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        Jadwal Minum Obat
-                    </h3>
-                    <button class="inline-flex items-center px-3 py-1.5 bg-primary-600 text-white text-xs font-semibold rounded-lg hover:bg-primary-700 transition">
-                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                        </svg>
-                        Tambah Jadwal
-                    </button>
-                </div>
-            </div>
-            <div class="p-6">
-                <div class="text-center text-gray-500 py-8">
-                    <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                    <p class="text-sm">Belum ada jadwal minum obat</p>
-                    <p class="text-xs text-gray-400 mt-1">Tambahkan jadwal untuk mulai mengirim pengingat</p>
                 </div>
             </div>
         </div>

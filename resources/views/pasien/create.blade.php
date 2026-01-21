@@ -22,6 +22,7 @@
                             id="namaPasien"
                             value="{{ old('namaPasien') }}"
                             required
+                            autofocus
                             class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 @error('namaPasien') border-red-500 @enderror">
                         @error('namaPasien')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>

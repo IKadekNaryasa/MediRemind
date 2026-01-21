@@ -5,7 +5,7 @@
         <div class="bg-white rounded-lg shadow">
             <div class="px-6 py-4 border-b border-gray-200 bg-primary-50">
                 <h3 class="text-lg font-semibold text-gray-800">Form Edit Data Pasien</h3>
-                <p class="text-sm text-gray-600 mt-1">Perbarui informasi pasien {{ $pasien->nama }}</p>
+                <p class="text-sm text-gray-600 mt-1">Perbarui informasi pasien {{ $pasien->namaPasien }}</p>
             </div>
 
             <form action="{{ route('pasien.update', $pasien) }}" method="POST" class="p-6">
@@ -14,115 +14,68 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Nama -->
-                    <div class="md:col-span-2">
+                    <div>
                         <label for="nama" class="block text-sm font-medium text-gray-700">
                             Nama Lengkap <span class="text-red-500">*</span>
                         </label>
                         <input type="text"
-                            name="nama"
-                            id="nama"
-                            value="{{ old('nama', $pasien->nama) }}"
+                            name="namaPasien"
+                            id="namaPasien"
+                            value="{{ old('namaPasien', $pasien->namaPasien) }}"
                             required
-                            class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 @error('nama') border-red-500 @enderror">
-                        @error('nama')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <!-- No Rekam Medis -->
-                    <div>
-                        <label for="no_rekam_medis" class="block text-sm font-medium text-gray-700">
-                            No. Rekam Medis <span class="text-red-500">*</span>
-                        </label>
-                        <input type="text"
-                            name="no_rekam_medis"
-                            id="no_rekam_medis"
-                            value="{{ old('no_rekam_medis', $pasien->no_rekam_medis) }}"
-                            required
-                            class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 @error('no_rekam_medis') border-red-500 @enderror">
-                        @error('no_rekam_medis')
+                            class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 @error('namaPasien') border-red-500 @enderror">
+                        @error('namaPasien')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
 
                     <!-- Jenis Kelamin -->
                     <div>
-                        <label for="jenis_kelamin" class="block text-sm font-medium text-gray-700">
+                        <label for="jenisKelamin" class="block text-sm font-medium text-gray-700">
                             Jenis Kelamin <span class="text-red-500">*</span>
                         </label>
-                        <select name="jenis_kelamin"
-                            id="jenis_kelamin"
+                        <select name="jenisKelamin"
+                            id="jenisKelamin"
                             required
-                            class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 @error('jenis_kelamin') border-red-500 @enderror">
-                            <option value="">Pilih Jenis Kelamin</option>
-                            <option value="Laki-laki" {{ old('jenis_kelamin', $pasien->jenis_kelamin) == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
-                            <option value="Perempuan" {{ old('jenis_kelamin', $pasien->jenis_kelamin) == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+                            class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 @error('jenisKelamin') border-red-500 @enderror">
+                            <option value="" select disabled>Pilih Jenis Kelamin</option>
+                            <option value="Laki-laki" {{ old('jenisKelamin', $pasien->jenisKelamin) == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
+                            <option value="Perempuan" {{ old('jenisKelamin', $pasien->jenisKelamin) == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
                         </select>
-                        @error('jenis_kelamin')
+                        @error('jenisKelamin')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
 
                     <!-- Tanggal Lahir -->
                     <div>
-                        <label for="tanggal_lahir" class="block text-sm font-medium text-gray-700">
+                        <label for="tanggalLahir" class="block text-sm font-medium text-gray-700">
                             Tanggal Lahir <span class="text-red-500">*</span>
                         </label>
                         <input type="date"
-                            name="tanggal_lahir"
-                            id="tanggal_lahir"
-                            value="{{ old('tanggal_lahir', $pasien->tanggal_lahir->format('Y-m-d')) }}"
+                            name="tanggalLahir"
+                            id="tanggalLahir"
+                            value="{{ old('tanggalLahir', $pasien->tanggalLahir->format('Y-m-d')) }}"
                             required
-                            class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 @error('tanggal_lahir') border-red-500 @enderror">
-                        @error('tanggal_lahir')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <!-- Tanggal Diagnosa -->
-                    <div>
-                        <label for="tanggal_diagnosa" class="block text-sm font-medium text-gray-700">
-                            Tanggal Diagnosa <span class="text-red-500">*</span>
-                        </label>
-                        <input type="date"
-                            name="tanggal_diagnosa"
-                            id="tanggal_diagnosa"
-                            value="{{ old('tanggal_diagnosa', $pasien->tanggal_diagnosa->format('Y-m-d')) }}"
-                            required
-                            class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 @error('tanggal_diagnosa') border-red-500 @enderror">
-                        @error('tanggal_diagnosa')
+                            class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 @error('tanggalLahir') border-red-500 @enderror">
+                        @error('tanggalLahir')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
 
                     <!-- No HP -->
                     <div>
-                        <label for="no_hp" class="block text-sm font-medium text-gray-700">
+                        <label for="wa" class="block text-sm font-medium text-gray-700">
                             No. HP/WhatsApp <span class="text-red-500">*</span>
                         </label>
                         <input type="text"
-                            name="no_hp"
-                            id="no_hp"
-                            value="{{ old('no_hp', $pasien->no_hp) }}"
+                            name="wa"
+                            id="wa"
+                            value="{{ old('wa', $pasien->wa) }}"
                             placeholder="08xxxxxxxxxx"
                             required
-                            class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 @error('no_hp') border-red-500 @enderror">
-                        @error('no_hp')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <!-- Email -->
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700">
-                            Email
-                        </label>
-                        <input type="email"
-                            name="email"
-                            id="email"
-                            value="{{ old('email', $pasien->email) }}"
-                            class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 @error('email') border-red-500 @enderror">
-                        @error('email')
+                            class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 @error('wa') border-red-500 @enderror">
+                        @error('wa')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
@@ -134,7 +87,7 @@
                         </label>
                         <textarea name="alamat"
                             id="alamat"
-                            rows="3"
+                            rows="1"
                             required
                             class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 @error('alamat') border-red-500 @enderror">{{ old('alamat', $pasien->alamat) }}</textarea>
                         @error('alamat')
@@ -142,17 +95,18 @@
                         @enderror
                     </div>
 
-                    <!-- Catatan -->
-                    <div class="md:col-span-2">
-                        <label for="catatan" class="block text-sm font-medium text-gray-700">
-                            Catatan
+                    <!--  Jam Minum Obat -->
+                    <div>
+                        <label for="jam" class="block text-sm font-medium text-gray-700">
+                            Jam Minum Obat <span class="text-red-500">*</span>
                         </label>
-                        <textarea name="catatan"
-                            id="catatan"
-                            rows="3"
-                            placeholder="Catatan tambahan tentang pasien (opsional)"
-                            class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 @error('catatan') border-red-500 @enderror">{{ old('catatan', $pasien->catatan) }}</textarea>
-                        @error('catatan')
+                        <input type="time"
+                            name="jam"
+                            id="jam"
+                            value="{{ old('jam', $pasien->jam) }}"
+                            required
+                            class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 @error('jam') border-red-500 @enderror">
+                        @error('jam')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
@@ -166,8 +120,8 @@
                             id="status"
                             required
                             class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 @error('status') border-red-500 @enderror">
-                            <option value="Aktif" {{ old('status', $pasien->status) == 'Aktif' ? 'selected' : '' }}>Aktif</option>
-                            <option value="Tidak Aktif" {{ old('status', $pasien->status) == 'Tidak Aktif' ? 'selected' : '' }}>Tidak Aktif</option>
+                            <option value="active" {{ old('status', $pasien->status) == 'active' ? 'selected' : '' }}>Aktif</option>
+                            <option value="nonactive" {{ old('status', $pasien->status) == 'nonactive' ? 'selected' : '' }}>Tidak Aktif</option>
                         </select>
                         @error('status')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
