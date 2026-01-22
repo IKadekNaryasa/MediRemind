@@ -220,7 +220,7 @@
     <footer class="bg-green-600 text-slate-300 py-8">
         <div class="container mx-auto px-4 text-center">
             <p class="text-sm font-medium">
-                &copy; 2026 <span class="text-green-200">MediRemind</span>. All Rights Reserved.
+                &copy; {{ date('Y') }} <span class="text-green-200">MediRemind</span>. All Rights Reserved.
             </p>
             <p class="text-xs mt-2 opacity-75">
                 Aplikasi Pengingat Obat Otomatis.
