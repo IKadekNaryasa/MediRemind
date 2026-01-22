@@ -97,19 +97,4 @@ class SendAlertPasien extends Command
             return false;
         }
     }
-
-    private function formatWaNumber(string $wa): string
-    {
-        $wa = preg_replace('/[^0-9]/', '', $wa);
-
-        if (substr($wa, 0, 1) === '0') {
-            $wa = '62' . substr($wa, 1);
-        }
-
-        if (substr($wa, 0, 2) !== '62') {
-            $wa = '62' . $wa;
-        }
-
-        return $wa;
-    }
 }
