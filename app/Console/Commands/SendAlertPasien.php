@@ -59,7 +59,7 @@ class SendAlertPasien extends Command
         $this->newLine(2);
 
         $this->info('-- Info --');
-        $this->info("Total Pasien Dengan Jadwal Minum Obat Jam  : {$patients->count()}");
+        $this->info("Total Pasien Dengan Jadwal Minum Obat Jam {$timeNow}  : {$patients->count()}");
         $this->info("Berhasil terkirim : {$successCount} ");
         $this->error("Gagal terkirim : {$failedCount}");
 
