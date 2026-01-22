@@ -57,3 +57,21 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Cara Configurasi
+
+1. clone dan install semua kebutuhan laravel
+2. rename atau copy file .env.example menjadi .env
+3. Tambahkan setingan berikut :
+   APP_TIMEZONE=Asia/Makassar
+
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com  
+MAIL_PORT=587  
+MAIL_USERNAME="<email yg aktif>"  
+MAIL_PASSWORD="<mail password, cara membuat di https://ayongoding.commembuat-kirim-email-laravel>"  
+MAIL_ENCRYPTION=tls  
+MAIL_FROM_ADDRESS="<email yg aktif>"  
+MAIL_FROM_NAME="${APP_NAME}"
+
+AUTH_FONTE=<kode token fonte>
