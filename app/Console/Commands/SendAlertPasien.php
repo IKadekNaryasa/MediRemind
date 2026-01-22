@@ -71,7 +71,6 @@ class SendAlertPasien extends Command
         if (!$pasien | !$pasien->wa) {
             return false;
         }
-
         $wa = $pasien->wa;
         $message = "Pengingat Minum Obat! \n\n";
         $message .= "Halo, bapak/ibu {$pasien->namaPasien} \n";
