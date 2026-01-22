@@ -1,7 +1,7 @@
 <x-app-sidebar-layout>
     @section('header', 'Dashboard')
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
         <!-- Card Total Pasien -->
         <div class="bg-white rounded-lg shadow p-6">
             <div class="flex items-center">
@@ -12,7 +12,7 @@
                 </div>
                 <div class="ml-4">
                     <p class="text-sm text-gray-500">Total Pasien</p>
-                    <p class="text-2xl font-bold text-gray-700">0</p>
+                    <p class="text-2xl font-bold text-gray-700">{{ $jumlahPasien }}</p>
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
                 </div>
                 <div class="ml-4">
                     <p class="text-sm text-gray-500">Pasien Aktif</p>
-                    <p class="text-2xl font-bold text-gray-700">0</p>
+                    <p class="text-2xl font-bold text-gray-700">{{ $pasienAktif }}</p>
                 </div>
             </div>
         </div>
@@ -43,13 +43,13 @@
                 </div>
                 <div class="ml-4">
                     <p class="text-sm text-gray-500">Pasien Nonaktif</p>
-                    <p class="text-2xl font-bold text-gray-700">0</p>
+                    <p class="text-2xl font-bold text-gray-700">{{ $pasienNonaktif }}</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- data pasien baru -->
+    <!-- data pasien baru
     <div class="bg-white rounded-lg shadow">
         <div class="px-6 py-4 border-b border-gray-200">
             <h3 class="text-lg font-semibold text-gray-800">Data Pasien Baru</h3>
@@ -57,5 +57,5 @@
         <div class="p-6">
             <p class="text-gray-500 text-center py-8">Tidak ada pasien baru hari ini!</p>
         </div>
-    </div>
+    </div> -->
 </x-app-sidebar-layout>
